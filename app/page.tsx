@@ -7,8 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Slider } from "@/components/ui/slider"
-import { Trash2, Plus, Copy, Check, Download, RotateCcw } from "lucide-react"
+import { Trash2, Plus, Copy, Check, Download } from "lucide-react"
 
 interface Column {
   id: string
@@ -23,8 +22,6 @@ export default function TableGenerator() {
   const [useGutter, setUseGutter] = useState(true)
   const [gutterWidth, setGutterWidth] = useState(10)
   const [gutterInputValue, setGutterInputValue] = useState("10")
-  const [maxWidth, setMaxWidth] = useState(1200)
-  const [maxWidthInputValue, setMaxWidthInputValue] = useState("1200")
   const [columnInputValues, setColumnInputValues] = useState<Record<string, string>>({
     "1": "320",
     "2": "320",
@@ -42,84 +39,15 @@ export default function TableGenerator() {
     setGutterInputValue(String(gutterWidth))
   }, [gutterWidth])
 
-  useEffect(() => {
-    setMaxWidthInputValue(String(maxWidth))
-  }, [maxWidth])
-
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault()
-        document.getElementById('copy-btn')?.click()
-      }
-      if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-        e.preventDefault()
-        addColumn()
-      }
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'r') {
-        e.preventDefault()
-        resetToDefault()
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [])
-
   const resetToDefault = useCallback(() => {
     setColumns(DEFAULT_COLUMNS)
     setUseGutter(true)
     setGutterWidth(10)
     setGutterInputValue("10")
-    setMaxWidth(1200)
-    setMaxWidthInputValue("1200")
     setColumnInputValues({
       "1": "320",
       "2": "320",
     })
-  }, [])
-
-  const applyPreset = useCallback((preset: 'two-col' | 'three-col' | 'hero' | 'sidebar') => {
-    let newColumns: Column[]
-    switch (preset) {
-      case 'two-col':
-        newColumns = [
-          { id: "1", width: 300 },
-          { id: "2", width: 300 },
-        ]
-        setGutterWidth(20)
-        setGutterInputValue("20")
-        break
-      case 'three-col':
-        newColumns = [
-          { id: "1", width: 200 },
-          { id: "2", width: 200 },
-          { id: "3", width: 200 },
-        ]
-        setGutterWidth(15)
-        setGutterInputValue("15")
-        break
-      case 'hero':
-        newColumns = [
-          { id: "1", width: 600 },
-        ]
-        setUseGutter(false)
-        break
-      case 'sidebar':
-        newColumns = [
-          { id: "1", width: 180 },
-          { id: "2", width: 420 },
-        ]
-        setGutterWidth(20)
-        setGutterInputValue("20")
-        break
-    }
-    const newInputValues: Record<string, string> = {}
-    newColumns.forEach(col => {
-      newInputValues[col.id] = String(col.width)
-    })
-    setColumnInputValues(newInputValues)
-    setColumns(newColumns)
   }, [])
 
   const addColumn = useCallback(() => {
@@ -255,7 +183,6 @@ export default function TableGenerator() {
 
   const totalColumnWidth = columns.reduce((sum, col) => sum + col.width, 0)
   const totalGutterWidth = useGutter ? gutterWidth * Math.max(0, columns.length - 1) : 0
-  const totalContentWidth = totalColumnWidth + totalGutterWidth
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900 p-4 sm:p-6">
@@ -271,63 +198,11 @@ export default function TableGenerator() {
                 Generate responsive HTML email tables with floating layouts
               </p>
             </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={resetToDefault}
-                className="text-xs sm:text-sm"
-                title="Cmd+Shift+R"
-              >
-                <RotateCcw className="mr-1.5 h-4 w-4" />
-                <span className="hidden sm:inline">Reset</span>
-              </Button>
-            </div>
+
           </div>
         </div>
 
-        {/* Preset Templates */}
-        <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-          <CardHeader className="pb-3 pt-4">
-            <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">Quick Presets</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => applyPreset('hero')}
-                className="text-xs"
-              >
-                Hero (Full-width)
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => applyPreset('two-col')}
-                className="text-xs"
-              >
-                2 Columns
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => applyPreset('three-col')}
-                className="text-xs"
-              >
-                3 Columns
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => applyPreset('sidebar')}
-                className="text-xs"
-              >
-                Sidebar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+
 
         {/* Visual Preview */}
         <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
@@ -336,7 +211,7 @@ export default function TableGenerator() {
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto rounded-lg border-2 border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-800 p-4">
-              <div className="flex flex-nowrap" style={{ maxWidth: maxWidth }}>
+              <div className="flex flex-nowrap">
                 {columns.map((column, index) => (
                   <div key={column.id} className="flex shrink-0">
                     <div
@@ -389,7 +264,7 @@ export default function TableGenerator() {
                 )}
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Total</p>
-                  <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{totalContentWidth}px</p>
+                  <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{totalColumnWidth + totalGutterWidth}px</p>
                 </div>
               </div>
             )}
@@ -397,7 +272,7 @@ export default function TableGenerator() {
         </Card>
 
         {/* Controls - Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Gutter Settings */}
           <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
             <CardHeader className="pb-3 pt-4">
@@ -416,15 +291,6 @@ export default function TableGenerator() {
                 <div className="space-y-2">
                   <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width</Label>
                   <div className="flex gap-2 items-center">
-                    <Slider
-                      id="gutter-width"
-                      value={[gutterWidth]}
-                      onValueChange={(val) => setGutterWidth(val[0])}
-                      min={1}
-                      max={100}
-                      step={1}
-                      className="flex-1"
-                    />
                     <Input
                       type="text"
                       value={gutterInputValue}
@@ -451,51 +317,7 @@ export default function TableGenerator() {
             </CardContent>
           </Card>
 
-          {/* Max Width Settings */}
-          <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-            <CardHeader className="pb-3 pt-4">
-              <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">Max Width</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 pb-4">
-              <div className="space-y-2">
-                <Label htmlFor="max-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width</Label>
-                <div className="flex gap-2 items-center">
-                  <Slider
-                    id="max-width"
-                    value={[maxWidth]}
-                    onValueChange={(val) => setMaxWidth(val[0])}
-                    min={400}
-                    max={2000}
-                    step={10}
-                    className="flex-1"
-                  />
-                  <Input
-                    type="text"
-                    value={maxWidthInputValue}
-                    onChange={(e) => setMaxWidthInputValue(e.target.value)}
-                    onBlur={(e) => {
-                      if (e.target.value === "") {
-                        // Allow empty values while prototyping
-                        return
-                      }
-                      const val = parseInt(e.target.value)
-                      if (!isNaN(val) && val >= 400 && val <= 2000) {
-                        setMaxWidth(val)
-                      } else {
-                        setMaxWidthInputValue(String(maxWidth))
-                      }
-                    }}
-                    placeholder="1200"
-                    className="h-7 w-20 text-xs"
-                  />
-                  <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
-                </div>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Controls container max-width for preview
-              </p>
-            </CardContent>
-          </Card>
+
 
           {/* Columns Management */}
           <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
@@ -504,7 +326,7 @@ export default function TableGenerator() {
                 <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">
                   Columns ({columns.length})
                 </CardTitle>
-                <Button size="sm" variant="default" onClick={addColumn} className="h-7 text-xs" title="Cmd+L">
+                <Button size="sm" variant="default" onClick={addColumn} className="h-7 text-xs">
                   <Plus className="mr-1 h-3 w-3" />
                   <span className="hidden sm:inline">Add</span>
                 </Button>
@@ -527,16 +349,6 @@ export default function TableGenerator() {
                       <span className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">
                         Col {index + 1}
                       </span>
-                      <Slider
-                        value={[column.width]}
-                        onValueChange={(val) =>
-                          updateColumnWidth(column.id, val[0])
-                        }
-                        min={10}
-                        max={1000}
-                        step={5}
-                        className="flex-1"
-                      />
                       <Input
                         type="text"
                         value={columnInputValues[column.id] || column.width}
@@ -586,10 +398,7 @@ export default function TableGenerator() {
         <Card className="overflow-hidden border-slate-200 dark:border-zinc-800 bg-slate-950 dark:bg-zinc-950">
           <CardHeader className="border-b border-slate-800 dark:border-zinc-800 pb-3 pt-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div>
-                <CardTitle className="text-sm font-medium text-slate-200 dark:text-slate-300">Generated HTML</CardTitle>
-                <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">⌘+K to copy (Cmd+L to add column, Cmd+Shift+R to reset)</p>
-              </div>
+              <CardTitle className="text-sm font-medium text-slate-200 dark:text-slate-300">Generated HTML</CardTitle>
               <div className="flex gap-2">
                 <Button
                   id="copy-btn"
@@ -679,19 +488,7 @@ export default function TableGenerator() {
           </CardContent>
         </Card>
 
-        {/* Footer with Tips */}
-        <Card className="border-slate-200 dark:border-zinc-800 bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900/50">
-          <CardContent className="pt-4">
-            <div className="space-y-2">
-              <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200">💡 Keyboard Shortcuts</h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-blue-800 dark:text-blue-300">
-                <li><kbd className="px-2 py-1 rounded bg-white dark:bg-slate-800 border border-blue-300 dark:border-blue-700">⌘ K</kbd> - Copy code</li>
-                <li><kbd className="px-2 py-1 rounded bg-white dark:bg-slate-800 border border-blue-300 dark:border-blue-700">⌘ L</kbd> - Add column</li>
-                <li><kbd className="px-2 py-1 rounded bg-white dark:bg-slate-800 border border-blue-300 dark:border-blue-700">⌘ ⇧ R</kbd> - Reset all</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
+
       </div>
     </div>
   )
