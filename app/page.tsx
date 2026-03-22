@@ -1,5 +1,6 @@
 "use client"
 
+// Text input version for free deletion support
 import { useState, useCallback, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
