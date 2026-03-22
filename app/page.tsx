@@ -185,13 +185,13 @@ export default function TableGenerator() {
   const totalGutterWidth = useGutter ? gutterWidth * Math.max(0, columns.length - 1) : 0
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900 p-4 sm:p-6">
-      <div className="mx-auto max-w-6xl space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900 p-2 sm:p-3">
+      <div className="mx-auto max-w-6xl space-y-3">
         {/* Header with Title and Action Buttons */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div className="space-y-1">
-              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+        <div className="space-y-1 sm:space-y-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="space-y-0.5">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
                 Floating Table Generator
               </h1>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
@@ -206,11 +206,11 @@ export default function TableGenerator() {
 
         {/* Visual Preview */}
         <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-          <CardHeader className="pb-3 pt-4">
-            <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">Visual Preview</CardTitle>
+          <CardHeader className="pb-2 pt-2">
+            <CardTitle className="text-xs font-medium text-slate-900 dark:text-slate-100">Visual Preview</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto rounded-lg border-2 border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-800 p-4">
+          <CardContent className="p-2">
+            <div className="overflow-x-auto rounded-lg border-2 border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-800 p-2">
               <div className="flex flex-nowrap">
                 {columns.map((column, index) => (
                   <div key={column.id} className="flex shrink-0">
@@ -247,24 +247,24 @@ export default function TableGenerator() {
               </div>
             </div>
             {columns.length > 0 && (
-              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-slate-200 dark:border-zinc-700">
+              <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 p-2 bg-slate-50 dark:bg-zinc-800 rounded-lg border border-slate-200 dark:border-zinc-700">
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Columns</p>
-                  <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{columns.length}</p>
+                  <p className="text-base font-bold text-slate-900 dark:text-slate-100">{columns.length}</p>
                 </div>
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Column Width</p>
-                  <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth}px</p>
+                  <p className="text-base font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth}px</p>
                 </div>
                 {useGutter && columns.length > 1 && (
                   <div>
                     <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Gutter Width</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalGutterWidth}px</p>
+                    <p className="text-base font-bold text-slate-900 dark:text-slate-100">{totalGutterWidth}px</p>
                   </div>
                 )}
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Total</p>
-                  <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{totalColumnWidth + totalGutterWidth}px</p>
+                  <p className="text-base font-bold text-blue-600 dark:text-blue-400">{totalColumnWidth + totalGutterWidth}px</p>
                 </div>
               </div>
             )}
@@ -272,13 +272,13 @@ export default function TableGenerator() {
         </Card>
 
         {/* Controls - Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {/* Gutter Settings */}
           <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-            <CardHeader className="pb-3 pt-4">
-              <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">Gutter Settings</CardTitle>
+            <CardHeader className="pb-2 pt-2">
+              <CardTitle className="text-xs font-medium text-slate-900 dark:text-slate-100">Gutter Settings</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 pb-4">
+            <CardContent className="space-y-2 pb-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="use-gutter" className="text-xs text-slate-700 dark:text-slate-300">Enable Gutter</Label>
                 <Switch
@@ -290,7 +290,7 @@ export default function TableGenerator() {
               {useGutter && (
                 <div className="space-y-2">
                   <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width</Label>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-1 items-center">
                     <Input
                       type="text"
                       value={gutterInputValue}
@@ -308,9 +308,9 @@ export default function TableGenerator() {
                         }
                       }}
                       placeholder="10"
-                      className="h-7 w-16 text-xs"
+                      className="h-6 w-12 text-xs"
                     />
-                    <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-400 w-5">px</span>
                   </div>
                 </div>
               )}
@@ -321,28 +321,28 @@ export default function TableGenerator() {
 
           {/* Columns Management */}
           <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-            <CardHeader className="pb-2 pt-4">
-              <div className="flex items-center justify-between gap-2">
-                <CardTitle className="text-sm font-medium text-slate-900 dark:text-slate-100">
+            <CardHeader className="pb-2 pt-2">
+              <div className="flex items-center justify-between gap-1">
+                <CardTitle className="text-xs font-medium text-slate-900 dark:text-slate-100">
                   Columns ({columns.length})
                 </CardTitle>
-                <Button size="sm" variant="default" onClick={addColumn} className="h-7 text-xs">
-                  <Plus className="mr-1 h-3 w-3" />
+                <Button size="sm" variant="default" onClick={addColumn} className="h-6 text-xs px-2">
+                  <Plus className="mr-0.5 h-3 w-3" />
                   <span className="hidden sm:inline">Add</span>
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="pb-4">
+            <CardContent className="pb-2">
               {columns.length === 0 ? (
                 <p className="py-3 text-center text-xs text-slate-500 dark:text-slate-400">
                   No columns added
                 </p>
               ) : (
-                <div className="space-y-2 max-h-64 overflow-y-auto">
+                <div className="space-y-1 max-h-48 overflow-y-auto">
                   {columns.map((column, index) => (
                     <div
                       key={column.id}
-                      className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
+                      className={`flex items-center gap-1 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-2 py-1 transition-all duration-150 ${
                         animatingIds.has(column.id) ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
                       }`}
                     >
@@ -374,14 +374,14 @@ export default function TableGenerator() {
                           }
                         }}
                         placeholder={String(column.width)}
-                        className="h-7 w-16 text-xs"
+                        className="h-6 w-12 text-xs"
                       />
                       <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => removeColumn(column.id)}
-                        className="h-7 w-7 text-slate-600 dark:text-slate-400 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400"
+                        className="h-6 w-6 text-slate-600 dark:text-slate-400 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                         <span className="sr-only">Remove column</span>
@@ -396,17 +396,17 @@ export default function TableGenerator() {
 
         {/* Generated Code - Full Width */}
         <Card className="overflow-hidden border-slate-200 dark:border-zinc-800 bg-slate-950 dark:bg-zinc-950">
-          <CardHeader className="border-b border-slate-800 dark:border-zinc-800 pb-3 pt-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <CardTitle className="text-sm font-medium text-slate-200 dark:text-slate-300">Generated HTML</CardTitle>
-              <div className="flex gap-2">
+          <CardHeader className="border-b border-slate-800 dark:border-zinc-800 pb-2 pt-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <CardTitle className="text-xs font-medium text-slate-200 dark:text-slate-300">Generated HTML</CardTitle>
+              <div className="flex gap-1">
                 <Button
                   id="copy-btn"
                   size="sm"
                   variant="outline"
                   onClick={copyToClipboard}
                   disabled={columns.length === 0}
-                  className="h-8 text-xs border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100"
+                  className="h-6 border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100 text-xs px-2"
                 >
                   {copied ? (
                     <>
@@ -425,7 +425,7 @@ export default function TableGenerator() {
                   variant="outline"
                   onClick={downloadCode}
                   disabled={columns.length === 0}
-                  className="h-8 text-xs border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100"
+                  className="h-6 border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100 text-xs px-2"
                 >
                   <Download className="mr-1.5 h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Download</span>
@@ -434,8 +434,8 @@ export default function TableGenerator() {
             </div>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="overflow-auto max-h-96 bg-slate-950">
-              <pre className="p-4 text-xs leading-relaxed font-mono">
+            <div className="overflow-auto max-h-64 bg-slate-950">
+              <pre className="p-2 text-xs leading-tight font-mono">
                 <code>
                   {code.split('\n').map((line, lineIndex) => (
                     <div key={lineIndex} className="flex">
@@ -492,4 +492,3 @@ export default function TableGenerator() {
       </div>
     </div>
   )
-}
