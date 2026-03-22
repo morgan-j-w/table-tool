@@ -21,7 +21,13 @@ export default function TableGenerator() {
   ])
   const [useGutter, setUseGutter] = useState(true)
   const [gutterWidth, setGutterWidth] = useState(10)
+  const [gutterInputValue, setGutterInputValue] = useState("10")
   const [maxWidth, setMaxWidth] = useState(1200)
+  const [maxWidthInputValue, setMaxWidthInputValue] = useState("1200")
+  const [columnInputValues, setColumnInputValues] = useState<Record<string, string>>({
+    "1": "320",
+    "2": "320",
+  })
   const [copied, setCopied] = useState(false)
   const [animatingIds, setAnimatingIds] = useState<Set<string>>(new Set())
 
@@ -29,6 +35,15 @@ export default function TableGenerator() {
     { id: "1", width: 320 },
     { id: "2", width: 320 },
   ]
+
+  // Sync input values when state changes (from slider)
+  useEffect(() => {
+    setGutterInputValue(String(gutterWidth))
+  }, [gutterWidth])
+
+  useEffect(() => {
+    setMaxWidthInputValue(String(maxWidth))
+  }, [maxWidth])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -54,7 +69,13 @@ export default function TableGenerator() {
     setColumns(DEFAULT_COLUMNS)
     setUseGutter(true)
     setGutterWidth(10)
+    setGutterInputValue("10")
     setMaxWidth(1200)
+    setMaxWidthInputValue("1200")
+    setColumnInputValues({
+      "1": "320",
+      "2": "320",
+    })
   }, [])
 
   const applyPreset = useCallback((preset: 'two-col' | 'three-col' | 'hero' | 'sidebar') => {
@@ -66,6 +87,7 @@ export default function TableGenerator() {
           { id: "2", width: 300 },
         ]
         setGutterWidth(20)
+        setGutterInputValue("20")
         break
       case 'three-col':
         newColumns = [
@@ -74,6 +96,7 @@ export default function TableGenerator() {
           { id: "3", width: 200 },
         ]
         setGutterWidth(15)
+        setGutterInputValue("15")
         break
       case 'hero':
         newColumns = [
@@ -87,8 +110,14 @@ export default function TableGenerator() {
           { id: "2", width: 420 },
         ]
         setGutterWidth(20)
+        setGutterInputValue("20")
         break
     }
+    const newInputValues: Record<string, string> = {}
+    newColumns.forEach(col => {
+      newInputValues[col.id] = String(col.width)
+    })
+    setColumnInputValues(newInputValues)
     setColumns(newColumns)
   }, [])
 
@@ -99,6 +128,10 @@ export default function TableGenerator() {
       width: 200,
     }
     setColumns((prev) => [...prev, newColumn])
+    setColumnInputValues(prev => ({
+      ...prev,
+      [newId]: "200"
+    }))
     setAnimatingIds(prev => new Set(prev).add(newId))
     setTimeout(() => {
       setAnimatingIds(prev => {
@@ -113,6 +146,11 @@ export default function TableGenerator() {
     setAnimatingIds(prev => new Set(prev).add(id))
     setTimeout(() => {
       setColumns((prev) => prev.filter((col) => col.id !== id))
+      setColumnInputValues(prev => {
+        const next = { ...prev }
+        delete next[id]
+        return next
+      })
       setAnimatingIds(prev => {
         const next = new Set(prev)
         next.delete(id)
@@ -125,6 +163,10 @@ export default function TableGenerator() {
     setColumns((prev) =>
       prev.map((col) => (col.id === id ? { ...col, width } : col))
     )
+    setColumnInputValues(prev => ({
+      ...prev,
+      [id]: String(width)
+    }))
   }, [])
 
   const generateCode = useCallback(() => {
@@ -384,13 +426,14 @@ export default function TableGenerator() {
                     />
                     <Input
                       type="number"
-                      defaultValue={gutterWidth}
+                      value={gutterInputValue}
+                      onChange={(e) => setGutterInputValue(e.target.value)}
                       onBlur={(e) => {
                         const val = parseInt(e.target.value)
                         if (!isNaN(val) && val >= 1 && val <= 100) {
                           setGutterWidth(val)
                         } else {
-                          e.currentTarget.value = String(gutterWidth)
+                          setGutterInputValue(String(gutterWidth))
                         }
                       }}
                       min={1}
@@ -424,13 +467,14 @@ export default function TableGenerator() {
                   />
                   <Input
                     type="number"
-                    defaultValue={maxWidth}
+                    value={maxWidthInputValue}
+                    onChange={(e) => setMaxWidthInputValue(e.target.value)}
                     onBlur={(e) => {
                       const val = parseInt(e.target.value)
                       if (!isNaN(val) && val >= 400 && val <= 2000) {
                         setMaxWidth(val)
                       } else {
-                        e.currentTarget.value = String(maxWidth)
+                        setMaxWidthInputValue(String(maxWidth))
                       }
                     }}
                     min={400}
@@ -488,13 +532,22 @@ export default function TableGenerator() {
                       />
                       <Input
                         type="number"
-                        defaultValue={column.width}
+                        value={columnInputValues[column.id] || column.width}
+                        onChange={(e) => {
+                          setColumnInputValues(prev => ({
+                            ...prev,
+                            [column.id]: e.target.value
+                          }))
+                        }}
                         onBlur={(e) => {
                           const val = parseInt(e.target.value)
                           if (!isNaN(val) && val >= 10 && val <= 1000) {
                             updateColumnWidth(column.id, val)
                           } else {
-                            e.currentTarget.value = String(column.width)
+                            setColumnInputValues(prev => ({
+                              ...prev,
+                              [column.id]: String(column.width)
+                            }))
                           }
                         }}
                         min={10}
