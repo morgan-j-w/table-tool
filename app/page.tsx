@@ -429,6 +429,10 @@ export default function TableGenerator() {
                       value={gutterInputValue}
                       onChange={(e) => setGutterInputValue(e.target.value)}
                       onBlur={(e) => {
+                        if (e.target.value === "") {
+                          // Allow empty values while prototyping
+                          return
+                        }
                         const val = parseInt(e.target.value)
                         if (!isNaN(val) && val >= 1 && val <= 100) {
                           setGutterWidth(val)
@@ -470,6 +474,10 @@ export default function TableGenerator() {
                     value={maxWidthInputValue}
                     onChange={(e) => setMaxWidthInputValue(e.target.value)}
                     onBlur={(e) => {
+                      if (e.target.value === "") {
+                        // Allow empty values while prototyping
+                        return
+                      }
                       const val = parseInt(e.target.value)
                       if (!isNaN(val) && val >= 400 && val <= 2000) {
                         setMaxWidth(val)
@@ -540,6 +548,10 @@ export default function TableGenerator() {
                           }))
                         }}
                         onBlur={(e) => {
+                          if (e.target.value === "") {
+                            // Allow empty values while prototyping
+                            return
+                          }
                           const val = parseInt(e.target.value)
                           if (!isNaN(val) && val >= 10 && val <= 1000) {
                             updateColumnWidth(column.id, val)
