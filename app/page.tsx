@@ -371,16 +371,32 @@ export default function TableGenerator() {
               </div>
               {useGutter && (
                 <div className="space-y-2">
-                  <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width: {gutterWidth}px</Label>
-                  <Slider
-                    id="gutter-width"
-                    value={[gutterWidth]}
-                    onValueChange={(val) => setGutterWidth(val[0])}
-                    min={1}
-                    max={100}
-                    step={1}
-                    className="w-full"
-                  />
+                  <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width</Label>
+                  <div className="flex gap-2 items-center">
+                    <Slider
+                      id="gutter-width"
+                      value={[gutterWidth]}
+                      onValueChange={(val) => setGutterWidth(val[0])}
+                      min={1}
+                      max={100}
+                      step={1}
+                      className="flex-1"
+                    />
+                    <Input
+                      type="number"
+                      value={gutterWidth}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value)
+                        if (!isNaN(val) && val >= 1 && val <= 100) {
+                          setGutterWidth(val)
+                        }
+                      }}
+                      min={1}
+                      max={100}
+                      className="h-7 w-16 text-xs"
+                    />
+                    <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
+                  </div>
                 </div>
               )}
             </CardContent>
@@ -393,16 +409,32 @@ export default function TableGenerator() {
             </CardHeader>
             <CardContent className="space-y-4 pb-4">
               <div className="space-y-2">
-                <Label htmlFor="max-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width: {maxWidth}px</Label>
-                <Slider
-                  id="max-width"
-                  value={[maxWidth]}
-                  onValueChange={(val) => setMaxWidth(val[0])}
-                  min={400}
-                  max={2000}
-                  step={10}
-                  className="w-full"
-                />
+                <Label htmlFor="max-width" className="text-xs font-medium text-slate-700 dark:text-slate-300">Width</Label>
+                <div className="flex gap-2 items-center">
+                  <Slider
+                    id="max-width"
+                    value={[maxWidth]}
+                    onValueChange={(val) => setMaxWidth(val[0])}
+                    min={400}
+                    max={2000}
+                    step={10}
+                    className="flex-1"
+                  />
+                  <Input
+                    type="number"
+                    value={maxWidth}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value)
+                      if (!isNaN(val) && val >= 400 && val <= 2000) {
+                        setMaxWidth(val)
+                      }
+                    }}
+                    min={400}
+                    max={2000}
+                    className="h-7 w-20 text-xs"
+                  />
+                  <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
+                </div>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Controls container max-width for preview
@@ -450,9 +482,20 @@ export default function TableGenerator() {
                         step={5}
                         className="flex-1"
                       />
-                      <span className="text-xs font-semibold text-slate-900 dark:text-slate-100 min-w-fit">
-                        {column.width}px
-                      </span>
+                      <Input
+                        type="number"
+                        value={column.width}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value)
+                          if (!isNaN(val) && val >= 10 && val <= 1000) {
+                            updateColumnWidth(column.id, val)
+                          }
+                        }}
+                        min={10}
+                        max={1000}
+                        className="h-7 w-16 text-xs"
+                      />
+                      <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
                       <Button
                         variant="ghost"
                         size="icon"
