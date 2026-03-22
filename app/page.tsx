@@ -425,7 +425,7 @@ export default function TableGenerator() {
                       className="flex-1"
                     />
                     <Input
-                      type="number"
+                      type="text"
                       value={gutterInputValue}
                       onChange={(e) => setGutterInputValue(e.target.value)}
                       onBlur={(e) => {
@@ -440,8 +440,7 @@ export default function TableGenerator() {
                           setGutterInputValue(String(gutterWidth))
                         }
                       }}
-                      min={1}
-                      max={100}
+                      placeholder="10"
                       className="h-7 w-16 text-xs"
                     />
                     <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
@@ -470,7 +469,7 @@ export default function TableGenerator() {
                     className="flex-1"
                   />
                   <Input
-                    type="number"
+                    type="text"
                     value={maxWidthInputValue}
                     onChange={(e) => setMaxWidthInputValue(e.target.value)}
                     onBlur={(e) => {
@@ -485,8 +484,7 @@ export default function TableGenerator() {
                         setMaxWidthInputValue(String(maxWidth))
                       }
                     }}
-                    min={400}
-                    max={2000}
+                    placeholder="1200"
                     className="h-7 w-20 text-xs"
                   />
                   <span className="text-xs text-slate-600 dark:text-slate-400 w-7">px</span>
@@ -539,7 +537,7 @@ export default function TableGenerator() {
                         className="flex-1"
                       />
                       <Input
-                        type="number"
+                        type="text"
                         value={columnInputValues[column.id] || column.width}
                         onChange={(e) => {
                           setColumnInputValues(prev => ({
@@ -562,8 +560,7 @@ export default function TableGenerator() {
                             }))
                           }
                         }}
-                        min={10}
-                        max={1000}
+                        placeholder={String(column.width)}
                         className="h-7 w-16 text-xs"
                       />
                       <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
