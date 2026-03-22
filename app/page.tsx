@@ -384,11 +384,13 @@ export default function TableGenerator() {
                     />
                     <Input
                       type="number"
-                      value={gutterWidth}
-                      onChange={(e) => {
+                      defaultValue={gutterWidth}
+                      onBlur={(e) => {
                         const val = parseInt(e.target.value)
                         if (!isNaN(val) && val >= 1 && val <= 100) {
                           setGutterWidth(val)
+                        } else {
+                          e.currentTarget.value = String(gutterWidth)
                         }
                       }}
                       min={1}
@@ -422,11 +424,13 @@ export default function TableGenerator() {
                   />
                   <Input
                     type="number"
-                    value={maxWidth}
-                    onChange={(e) => {
+                    defaultValue={maxWidth}
+                    onBlur={(e) => {
                       const val = parseInt(e.target.value)
                       if (!isNaN(val) && val >= 400 && val <= 2000) {
                         setMaxWidth(val)
+                      } else {
+                        e.currentTarget.value = String(maxWidth)
                       }
                     }}
                     min={400}
@@ -484,11 +488,13 @@ export default function TableGenerator() {
                       />
                       <Input
                         type="number"
-                        value={column.width}
-                        onChange={(e) => {
+                        defaultValue={column.width}
+                        onBlur={(e) => {
                           const val = parseInt(e.target.value)
                           if (!isNaN(val) && val >= 10 && val <= 1000) {
                             updateColumnWidth(column.id, val)
+                          } else {
+                            e.currentTarget.value = String(column.width)
                           }
                         }}
                         min={10}
