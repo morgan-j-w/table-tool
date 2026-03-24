@@ -254,7 +254,7 @@ export default function TableGenerator() {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Column Width</p>
-                  <p className="text-base font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth}px</p>
+                  <p className="text-base font-bold text-primary">{totalColumnWidth}</p>
                 </div>
                 {useGutter && columns.length > 1 && (
                   <div>
@@ -264,7 +264,7 @@ export default function TableGenerator() {
                 )}
                 <div>
                   <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Total</p>
-                  <p className="text-base font-bold text-blue-600 dark:text-blue-400">{totalColumnWidth + totalGutterWidth}px</p>
+                  <p className="text-base font-bold text-primary">{totalColumnWidth + totalGutterWidth}px</p>
                 </div>
               </div>
             )}
@@ -326,7 +326,7 @@ export default function TableGenerator() {
                 <CardTitle className="text-xs font-medium text-slate-900 dark:text-slate-100">
                   Columns ({columns.length})
                 </CardTitle>
-                <Button size="sm" variant="default" onClick={addColumn} className="h-6 text-xs px-2">
+                <Button size="sm" variant="default" onClick={addColumn} className="h-6 text-xs px-2 bg-primary hover:bg-primary/90">
                   <Plus className="mr-0.5 h-3 w-3" />
                   <span className="hidden sm:inline">Add</span>
                 </Button>
@@ -406,7 +406,7 @@ export default function TableGenerator() {
                   variant="outline"
                   onClick={copyToClipboard}
                   disabled={columns.length === 0}
-                  className="h-6 border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100 text-xs px-2"
+                  className="h-6 border-primary bg-primary text-white hover:bg-primary/90 text-xs px-2"
                 >
                   {copied ? (
                     <>
@@ -425,7 +425,7 @@ export default function TableGenerator() {
                   variant="outline"
                   onClick={downloadCode}
                   disabled={columns.length === 0}
-                  className="h-6 border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 hover:text-slate-100 text-xs px-2"
+                  className="h-6 border-primary bg-primary text-white hover:bg-primary/90 text-xs px-2"
                 >
                   <Download className="mr-1.5 h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Download</span>
