@@ -116,17 +116,14 @@ export default function TableGenerator() {
         </tr>
       </table>`
 
-      // After each column (except last), add MSO comment + gutter + MSO comment
+      // After each column (except last), add gutter section
       if (!isLast) {
-        const msoGutterWidth = useGutter ? gutterWidth * 2 : 0
-        const nextColumn = columns[index + 1]
-        
-        // MSO comment before gutter
+        // MSO comment closing previous td and opening gutter td
         innerContent += `
       
       <!--[if mso]>
           </td>
-          <td width="${msoGutterWidth}" valign="top">
+          <td valign="top">
       <![endif]-->`
 
         // Gutter table (if enabled)
@@ -135,17 +132,17 @@ export default function TableGenerator() {
       
       <table role="presentation" class="sd-mobile-full-width" width="${gutterWidth}" align="left" style="width:${gutterWidth}px;float:left;" cellspacing="0" cellpadding="0">
         <tr>
-          <td><!-- SPACER / GUTTER --></td>
+          <td style="font-size:1px; line-height: 1px; height: ${gutterWidth}px;" height="${gutterWidth}">&nbsp;</td>
         </tr>
       </table>`
         }
 
-        // MSO comment before next column
+        // MSO comment closing gutter td and opening next column td
         innerContent += `
       
       <!--[if mso]>
           </td>
-          <td width="${nextColumn.width}" valign="top">
+          <td valign="top">
       <![endif]--> 
       
       <!-- ${index + 2 === columns.length ? "Right" : `Column ${index + 2}`} column -->
