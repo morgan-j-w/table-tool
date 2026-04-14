@@ -116,18 +116,17 @@ export default function TableGenerator() {
         </tr>
       </table>`
 
-      // After each column (except last), add gutter section
+      // After each column (except last), add separator/gutter section
       if (!isLast) {
-        // MSO comment closing previous td and opening gutter td
-        innerContent += `
+        if (useGutter) {
+          // With gutter: opening MSO comment + gutter table + closing MSO comment
+          innerContent += `
       
       <!--[if mso]>
           </td>
           <td valign="top">
       <![endif]-->`
 
-        // Gutter table (if enabled)
-        if (useGutter) {
           innerContent += `
       
       <table role="presentation" class="sd-mobile-full-width" width="${gutterWidth}" align="left" style="width:${gutterWidth}px;float:left;" cellspacing="0" cellpadding="0">
@@ -135,10 +134,8 @@ export default function TableGenerator() {
           <td style="font-size:1px; line-height: 1px; height: ${gutterWidth}px;" height="${gutterWidth}">&nbsp;</td>
         </tr>
       </table>`
-        }
 
-        // MSO comment closing gutter td and opening next column td
-        innerContent += `
+          innerContent += `
       
       <!--[if mso]>
           </td>
@@ -148,6 +145,17 @@ export default function TableGenerator() {
       <!-- ${index + 2 === columns.length ? "Right" : `Column ${index + 2}`} column -->
       
       `
+        } else {
+          // Without gutter: just single MSO comment between columns
+          innerContent += `
+      
+      <!--[if mso]>
+          </td>
+          <td valign="top">
+      <![endif]-->
+      
+      `
+        }
       }
     })
 
