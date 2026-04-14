@@ -489,3 +489,4 @@ export default function TableGenerator() {
       </div>
     </div>
   )
+}
