@@ -330,7 +330,7 @@ export default function TableGenerator() {
                           }
                         }}
                         placeholder="10"
-                        className="h-6 w-12 text-xs"
+                        className="h-8 w-14 text-xs"
                       />
                       <span className="text-xs text-slate-600 dark:text-slate-400 w-5">px</span>
                     </div>
