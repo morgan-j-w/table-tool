@@ -367,7 +367,7 @@ export default function TableGenerator() {
                         }`}
                       >
                         <span className="text-sm font-medium text-slate-600 dark:text-slate-400 min-w-fit">
-                          Col {index + 1}
+                          Column {index + 1}
                         </span>
                         <Input
                           type="text"
