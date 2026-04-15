@@ -293,11 +293,11 @@ export default function TableGenerator() {
             </Card>
           )}
 
-          {/* Settings */}
-          <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-            <CardContent className="p-3 space-y-4">
-              {/* Gutter Settings */}
-              <div>
+          {/* Settings - Right Column */}
+          <div className="space-y-3">
+            {/* Gutter Settings Card */}
+            <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+              <CardContent className="p-3">
                 <div className="flex items-center gap-2 mb-3">
                   <MoreVertical className="h-4 w-4 text-slate-500" />
                   <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Gutter</h3>
@@ -336,10 +336,12 @@ export default function TableGenerator() {
                     </div>
                   </div>
                 )}
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Columns Management */}
-              <div className="border-t border-slate-200 dark:border-zinc-700 pt-3">
+            {/* Columns Management Card */}
+            <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+              <CardContent className="p-3">
                 <div className="flex items-center gap-2 mb-3">
                   <Grid2X2 className="h-4 w-4 text-slate-500" />
                   <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Columns</h3>
@@ -407,9 +409,9 @@ export default function TableGenerator() {
                     ))}
                   </div>
                 )}
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Generated Code - Full Width */}
