@@ -144,8 +144,6 @@ export default function TableGenerator() {
           <td valign="top">
       <![endif]--> 
       
-      <!-- Column ${index + 2} content -->
-      
       `
         } else {
           // Without gutter: just single MSO comment between columns
