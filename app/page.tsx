@@ -159,8 +159,7 @@ export default function TableGenerator() {
       }
     })
 
-    return `<!-- Parent wrapper -->
-<table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+    return `<table role="presentation" width="100%" cellspacing="0" cellpadding="0">
   <tr>
     <td>${innerContent}</td>
   </tr>
