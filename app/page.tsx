@@ -251,7 +251,122 @@ export default function TableGenerator() {
         </Card>
 
         {/* Controls - Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* Gutter Settings Card */}
+          <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-3">
+                <MoreVertical className="h-4 w-4 text-slate-500" />
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Gutter</h3>
+              </div>
+              <div className="flex items-center justify-between mb-2">
+                <Label htmlFor="use-gutter" className="text-sm font-medium text-slate-700 dark:text-slate-300">Enable Gutter</Label>
+                <Switch
+                  id="use-gutter"
+                  checked={useGutter}
+                  onCheckedChange={setUseGutter}
+                />
+              </div>
+              {useGutter && (
+                <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2">
+                  <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">Width (px)</Label>
+                  <Input
+                    type="text"
+                    value={gutterInputValue}
+                    onChange={(e) => setGutterInputValue(e.target.value)}
+                    onBlur={(e) => {
+                      if (e.target.value === "") {
+                        return
+                      }
+                      const val = parseInt(e.target.value)
+                      if (!isNaN(val) && val >= 1 && val <= 100) {
+                        setGutterWidth(val)
+                      } else {
+                        setGutterInputValue(String(gutterWidth))
+                      }
+                    }}
+                    placeholder="10"
+                    className="h-8 w-14 text-xs"
+                  />
+                  <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Columns Management Card */}
+          <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-2 mb-3">
+                <Grid2X2 className="h-4 w-4 text-slate-500" />
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Columns</h3>
+              </div>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-xs text-slate-500 dark:text-slate-400">{columns.length} {columns.length === 1 ? 'column' : 'columns'}</span>
+                <Button size="sm" variant="outline" onClick={addColumn} className="h-6 text-xs px-2">
+                  <Plus className="mr-0.5 h-3 w-3" />
+                  <span className="hidden sm:inline">Add</span>
+                </Button>
+              </div>
+              {columns.length === 0 ? (
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  No columns added
+                </p>
+              ) : (
+                <div className="space-y-2 max-h-56 overflow-y-auto">
+                  {columns.map((column, index) => (
+                    <div
+                      key={column.id}
+                      className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
+                        animatingIds.has(column.id) ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
+                      }`}
+                    >
+                      <span className="text-sm font-medium text-slate-600 dark:text-slate-400 min-w-fit">
+                        Column {index + 1}
+                      </span>
+                      <Input
+                        type="text"
+                        value={columnInputValues[column.id] || column.width}
+                        onChange={(e) => {
+                          setColumnInputValues(prev => ({
+                            ...prev,
+                            [column.id]: e.target.value
+                          }))
+                        }}
+                        onBlur={(e) => {
+                          if (e.target.value === "") {
+                            return
+                          }
+                          const val = parseInt(e.target.value)
+                          if (!isNaN(val) && val >= 10 && val <= 1000) {
+                            updateColumnWidth(column.id, val)
+                          } else {
+                            setColumnInputValues(prev => ({
+                              ...prev,
+                              [column.id]: String(column.width)
+                            }))
+                          }
+                        }}
+                        placeholder={String(column.width)}
+                        className="h-8 w-14 text-xs"
+                      />
+                      <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => removeColumn(column.id)}
+                        className="h-8 w-8 text-slate-600 dark:text-slate-400 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        <span className="sr-only">Remove column</span>
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Information on Widths */}
           {columns.length > 0 && (
             <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
@@ -291,124 +406,6 @@ export default function TableGenerator() {
               </CardContent>
             </Card>
           )}
-
-          {/* Settings - Right Column */}
-          <div className="space-y-3">
-            {/* Gutter Settings Card */}
-            <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 mb-3">
-                  <MoreVertical className="h-4 w-4 text-slate-500" />
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Gutter</h3>
-                </div>
-                <div className="flex items-center justify-between mb-2">
-                  <Label htmlFor="use-gutter" className="text-sm font-medium text-slate-700 dark:text-slate-300">Enable Gutter</Label>
-                  <Switch
-                    id="use-gutter"
-                    checked={useGutter}
-                    onCheckedChange={setUseGutter}
-                  />
-                </div>
-                {useGutter && (
-                  <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2">
-                    <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">Width (px)</Label>
-                    <Input
-                      type="text"
-                      value={gutterInputValue}
-                      onChange={(e) => setGutterInputValue(e.target.value)}
-                      onBlur={(e) => {
-                        if (e.target.value === "") {
-                          return
-                        }
-                        const val = parseInt(e.target.value)
-                        if (!isNaN(val) && val >= 1 && val <= 100) {
-                          setGutterWidth(val)
-                        } else {
-                          setGutterInputValue(String(gutterWidth))
-                        }
-                      }}
-                      placeholder="10"
-                      className="h-8 w-14 text-xs"
-                    />
-                    <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Columns Management Card */}
-            <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 mb-3">
-                  <Grid2X2 className="h-4 w-4 text-slate-500" />
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Columns</h3>
-                </div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-xs text-slate-500 dark:text-slate-400">{columns.length} {columns.length === 1 ? 'column' : 'columns'}</span>
-                  <Button size="sm" variant="outline" onClick={addColumn} className="h-6 text-xs px-2">
-                    <Plus className="mr-0.5 h-3 w-3" />
-                    <span className="hidden sm:inline">Add</span>
-                  </Button>
-                </div>
-                {columns.length === 0 ? (
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    No columns added
-                  </p>
-                ) : (
-                  <div className="space-y-2 max-h-56 overflow-y-auto">
-                    {columns.map((column, index) => (
-                      <div
-                        key={column.id}
-                        className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
-                          animatingIds.has(column.id) ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
-                        }`}
-                      >
-                        <span className="text-sm font-medium text-slate-600 dark:text-slate-400 min-w-fit">
-                          Column {index + 1}
-                        </span>
-                        <Input
-                          type="text"
-                          value={columnInputValues[column.id] || column.width}
-                          onChange={(e) => {
-                            setColumnInputValues(prev => ({
-                              ...prev,
-                              [column.id]: e.target.value
-                            }))
-                          }}
-                          onBlur={(e) => {
-                            if (e.target.value === "") {
-                              return
-                            }
-                            const val = parseInt(e.target.value)
-                            if (!isNaN(val) && val >= 10 && val <= 1000) {
-                              updateColumnWidth(column.id, val)
-                            } else {
-                              setColumnInputValues(prev => ({
-                                ...prev,
-                                [column.id]: String(column.width)
-                              }))
-                            }
-                          }}
-                          placeholder={String(column.width)}
-                          className="h-8 w-14 text-xs"
-                        />
-                        <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => removeColumn(column.id)}
-                          className="h-8 w-8 text-slate-600 dark:text-slate-400 hover:bg-red-100 dark:hover:bg-red-900 hover:text-red-600 dark:hover:text-red-400"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Remove column</span>
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
         </div>
 
         {/* Generated Code - Full Width */}
