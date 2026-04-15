@@ -114,7 +114,7 @@ export default function TableGenerator() {
       // Column table
       innerContent += `<table role="presentation" class="sd-mobile-full-width" width="${column.width}" align="${align}" style="width:${column.width}px;float:${float};" cellspacing="0" cellpadding="0">
         <tr>
-          <td><!-- ${isFirst ? "LEFT" : isLast ? "RIGHT" : `COLUMN ${index + 1}`} CONTENT --></td>
+          <td><!-- Column ${index + 1} content --></td>
         </tr>
       </table>`
 
@@ -144,7 +144,7 @@ export default function TableGenerator() {
           <td valign="top">
       <![endif]--> 
       
-      <!-- ${index + 2 === columns.length ? "Right" : `Column ${index + 2}`} column -->
+      <!-- Column ${index + 2} content -->
       
       `
         } else {
