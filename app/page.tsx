@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Trash2, Plus, Copy, Check, Download, Grid2X2, Maximize2, Dividers, BarChart3, Settings2 } from "lucide-react"
+import { Trash2, Plus, Copy, Check, Download, Grid2X2, Maximize2, MoreVertical, BarChart3, Settings2 } from "lucide-react"
 
 interface Column {
   id: string
@@ -275,7 +275,7 @@ export default function TableGenerator() {
                   {useGutter && columns.length > 1 && (
                     <div>
                       <div className="flex items-center gap-1.5 mb-1">
-                        <Dividers className="h-4 w-4 text-amber-500" />
+                        <MoreVertical className="h-4 w-4 text-amber-500" />
                         <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Gutter Width</p>
                       </div>
                       <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalGutterWidth}px</p>
@@ -299,7 +299,7 @@ export default function TableGenerator() {
               {/* Gutter Settings */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <Dividers className="h-4 w-4 text-slate-500" />
+                  <MoreVertical className="h-4 w-4 text-slate-500" />
                   <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Gutter</h3>
                 </div>
                 <div className="flex items-center justify-between mb-2">
