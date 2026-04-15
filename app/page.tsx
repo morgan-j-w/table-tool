@@ -310,29 +310,27 @@ export default function TableGenerator() {
                   />
                 </div>
                 {useGutter && (
-                  <div className="space-y-2">
-                    <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400">Width (px)</Label>
-                    <div className="flex gap-1 items-center">
-                      <Input
-                        type="text"
-                        value={gutterInputValue}
-                        onChange={(e) => setGutterInputValue(e.target.value)}
-                        onBlur={(e) => {
-                          if (e.target.value === "") {
-                            return
-                          }
-                          const val = parseInt(e.target.value)
-                          if (!isNaN(val) && val >= 1 && val <= 100) {
-                            setGutterWidth(val)
-                          } else {
-                            setGutterInputValue(String(gutterWidth))
-                          }
-                        }}
-                        placeholder="10"
-                        className="h-8 w-14 text-xs"
-                      />
-                      <span className="text-xs text-slate-600 dark:text-slate-400 w-5">px</span>
-                    </div>
+                  <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2">
+                    <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">Width (px)</Label>
+                    <Input
+                      type="text"
+                      value={gutterInputValue}
+                      onChange={(e) => setGutterInputValue(e.target.value)}
+                      onBlur={(e) => {
+                        if (e.target.value === "") {
+                          return
+                        }
+                        const val = parseInt(e.target.value)
+                        if (!isNaN(val) && val >= 1 && val <= 100) {
+                          setGutterWidth(val)
+                        } else {
+                          setGutterInputValue(String(gutterWidth))
+                        }
+                      }}
+                      placeholder="10"
+                      className="h-8 w-14 text-xs"
+                    />
+                    <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
                   </div>
                 )}
               </CardContent>
