@@ -251,8 +251,8 @@ export default function TableGenerator() {
           </CardContent>
         </Card>
 
-        {/* Controls - Stacked Layout */}
-        <div className="space-y-3">
+        {/* Controls - Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* Information on Widths */}
           {columns.length > 0 && (
             <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
