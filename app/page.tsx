@@ -452,7 +452,7 @@ export default function TableGenerator() {
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-auto max-h-96 bg-slate-50 dark:bg-slate-950">
-              <pre className="p-2 text-xs leading-relaxed font-mono bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+              <pre className="p-0 text-xs leading-relaxed font-mono bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
                 <code 
                   className="hljs language-html"
                   dangerouslySetInnerHTML={{
