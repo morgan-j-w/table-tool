@@ -257,32 +257,32 @@ export default function TableGenerator() {
           {columns.length > 0 && (
             <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
               <CardContent className="p-3">
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-1">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-3">
+                    <div className="flex items-center gap-1.5 mb-2">
                       <Grid2X2 className="h-4 w-4 text-blue-500" />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Columns</p>
                     </div>
                     <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{columns.length}</p>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-1">
+                  <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-3">
+                    <div className="flex items-center gap-1.5 mb-2">
                       <Maximize2 className="h-4 w-4 text-green-500" />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Column Width</p>
                     </div>
                     <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth}</p>
                   </div>
                   {useGutter && columns.length > 1 && (
-                    <div>
-                      <div className="flex items-center gap-1.5 mb-1">
+                    <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-3">
+                      <div className="flex items-center gap-1.5 mb-2">
                         <MoreVertical className="h-4 w-4 text-amber-500" />
                         <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Gutter Width</p>
                       </div>
                       <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalGutterWidth}px</p>
                     </div>
                   )}
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-1">
+                  <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-3">
+                    <div className="flex items-center gap-1.5 mb-2">
                       <BarChart3 className="h-4 w-4 text-purple-500" />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Total</p>
                     </div>
