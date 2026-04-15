@@ -331,7 +331,7 @@ export default function TableGenerator() {
                 <CardTitle className="text-xs font-medium text-slate-900 dark:text-slate-100">
                   Columns ({columns.length})
                 </CardTitle>
-                <Button size="sm" onClick={addColumn} className="h-6 text-xs px-2">
+                <Button size="sm" variant="outline" onClick={addColumn} className="h-6 text-xs px-2">
                   <Plus className="mr-0.5 h-3 w-3" />
                   <span className="hidden sm:inline">Add</span>
                 </Button>
@@ -408,6 +408,7 @@ export default function TableGenerator() {
                 <Button
                   id="copy-btn"
                   size="sm"
+                  variant="outline"
                   onClick={copyToClipboard}
                   disabled={columns.length === 0}
                   className="h-6 text-xs px-2"
@@ -426,6 +427,7 @@ export default function TableGenerator() {
                 </Button>
                 <Button
                   size="sm"
+                  variant="outline"
                   onClick={downloadCode}
                   disabled={columns.length === 0}
                   className="h-6 text-xs px-2"
