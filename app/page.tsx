@@ -2,6 +2,8 @@
 
 // Text input version for free deletion support
 import { useState, useCallback, useEffect } from "react"
+import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -455,54 +457,13 @@ export default function TableGenerator() {
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-auto max-h-64 bg-slate-950">
-              <pre className="p-2 text-xs leading-tight font-mono">
-                <code>
-                  {code.split('\n').map((line, lineIndex) => (
-                    <div key={lineIndex} className="flex">
-                      <span className="inline-block w-8 select-none pr-4 text-right text-slate-600 dark:text-slate-700">
-                        {lineIndex + 1}
-                      </span>
-                      <span className="flex-1">
-                        {line.includes('<!--') ? (
-                          <span className="text-slate-600 dark:text-slate-600 italic">{line}</span>
-                        ) : (
-                          <>
-                            {line.split(/(<[^>]+>)/g).map((part, partIndex) => {
-                              if (part.startsWith('<') && part.endsWith('>')) {
-                                const isClosing = part.startsWith('</')
-                                const tagMatch = part.match(/<\/?(\w+)/)
-                                const tagName = tagMatch ? tagMatch[1] : ''
-                                const afterTag = part.slice(isClosing ? 2 + tagName.length : 1 + tagName.length, -1)
-                                
-                                return (
-                                  <span key={partIndex}>
-                                    <span className="text-slate-600 dark:text-slate-600">{isClosing ? '</' : '<'}</span>
-                                    <span className="text-rose-400 dark:text-rose-400">{tagName}</span>
-                                    {afterTag.split(/(\w+="[^"]*")/g).map((attr, attrIndex) => {
-                                      const attrMatch = attr.match(/^(\w+)="([^"]*)"$/)
-                                      if (attrMatch) {
-                                        return (
-                                          <span key={attrIndex}>
-                                            <span className="text-amber-300 dark:text-amber-300"> {attrMatch[1]}</span>
-                                            <span className="text-slate-600 dark:text-slate-600">=</span>
-                                            <span className="text-emerald-400 dark:text-emerald-400">"{attrMatch[2]}"</span>
-                                          </span>
-                                        )
-                                      }
-                                      return <span key={attrIndex} className="text-slate-400 dark:text-slate-500">{attr}</span>
-                                    })}
-                                    <span className="text-slate-600 dark:text-slate-600">{'>'}</span>
-                                  </span>
-                                )
-                              }
-                              return <span key={partIndex} className="text-slate-300 dark:text-slate-400">{part}</span>
-                            })}
-                          </>
-                        )}
-                      </span>
-                    </div>
-                  ))}
-                </code>
+              <pre className="p-4 text-xs leading-tight font-mono">
+                <code 
+                  className="hljs language-html"
+                  dangerouslySetInnerHTML={{
+                    __html: hljs.highlight(code, { language: 'html' }).value
+                  }}
+                />
               </pre>
             </div>
           </CardContent>
