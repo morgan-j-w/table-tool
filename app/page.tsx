@@ -410,7 +410,7 @@ export default function TableGenerator() {
 
         {/* Generated Code - Full Width */}
         <Card className="overflow-hidden border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900">
-          <CardHeader className="border-b border-slate-200 dark:border-zinc-800 pb-3 pt-3 bg-slate-100 dark:bg-zinc-800">
+          <CardHeader className="border-b border-slate-200 dark:border-zinc-800 p-2 bg-slate-100 dark:bg-zinc-800">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div className="flex items-center gap-2">
                 <div className="h-6 w-6 rounded bg-slate-400 dark:bg-slate-600 flex items-center justify-center text-white text-xs font-bold">H</div>
