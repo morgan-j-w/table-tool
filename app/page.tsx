@@ -3,7 +3,7 @@
 // Text input version for free deletion support
 import { useState, useCallback, useEffect } from "react"
 import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/styles/atom-one-light.css'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -409,10 +409,13 @@ export default function TableGenerator() {
         </div>
 
         {/* Generated Code - Full Width */}
-        <Card className="overflow-hidden border-slate-200 dark:border-zinc-800 bg-slate-950 dark:bg-zinc-950">
-          <CardHeader className="border-b border-slate-800 dark:border-zinc-800 pb-3 pt-3">
+        <Card className="overflow-hidden border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900">
+          <CardHeader className="border-b border-slate-200 dark:border-zinc-800 pb-3 pt-3 bg-slate-100 dark:bg-zinc-800">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <CardTitle className="text-sm font-semibold text-slate-200 dark:text-slate-300">Generated HTML</CardTitle>
+              <div className="flex items-center gap-2">
+                <div className="h-6 w-6 rounded bg-slate-400 dark:bg-slate-600 flex items-center justify-center text-white text-xs font-bold">H</div>
+                <CardTitle className="text-sm font-semibold text-slate-900 dark:text-slate-100">table.html</CardTitle>
+              </div>
               <div className="flex gap-1">
                 <Button
                   id="copy-btn"
@@ -420,7 +423,7 @@ export default function TableGenerator() {
                   variant="outline"
                   onClick={copyToClipboard}
                   disabled={columns.length === 0}
-                  className="h-6 text-xs px-2"
+                  className="h-7 text-xs px-2"
                 >
                   {copied ? (
                     <>
@@ -439,7 +442,7 @@ export default function TableGenerator() {
                   variant="outline"
                   onClick={downloadCode}
                   disabled={columns.length === 0}
-                  className="h-6 text-xs px-2"
+                  className="h-7 text-xs px-2"
                 >
                   <Download className="mr-1.5 h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Download</span>
@@ -448,8 +451,8 @@ export default function TableGenerator() {
             </div>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="overflow-auto max-h-64 bg-slate-950">
-              <pre className="p-4 text-xs leading-tight font-mono">
+            <div className="overflow-auto max-h-96 bg-slate-50 dark:bg-slate-950">
+              <pre className="p-4 text-xs leading-relaxed font-mono bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
                 <code 
                   className="hljs language-html"
                   dangerouslySetInnerHTML={{
