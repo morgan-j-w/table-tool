@@ -189,24 +189,17 @@ export default function TableGenerator() {
   const totalGutterWidth = useGutter ? gutterWidth * Math.max(0, columns.length - 1) : 0
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900 p-2 sm:p-4">
-      <div className="mx-auto max-w-6xl space-y-3">
-        {/* Header with Title and Action Buttons */}
-        <div className="space-y-1 sm:space-y-2">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <div className="space-y-0.5">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-                Floating Table Generator
-              </h1>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-                Generate responsive HTML email tables with floating layouts
-              </p>
-            </div>
-
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900">
+      {/* Sticky Header */}
+      <header className="text-white shadow-lg p-4 md:p-6 sticky top-0 z-50" style={{backgroundColor: 'rgb(31, 41, 55)'}}>
+        <div className="mx-auto max-w-6xl">
+          <h1 className="text-lg md:text-2xl font-bold">Floating Table Generator</h1>
+          <p className="text-xs md:text-sm text-gray-300 mt-1">Generate responsive HTML email tables with floating layouts</p>
         </div>
+      </header>
 
-
+      <div className="mx-auto max-w-6xl space-y-3 p-2 sm:p-4">
+        {/* Main Content */}
 
         {/* Visual Preview */}
         <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
