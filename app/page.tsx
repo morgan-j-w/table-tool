@@ -268,7 +268,7 @@ export default function TableGenerator() {
                 />
               </div>
               {useGutter && (
-                <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2">
+                <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2 w-full">
                   <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">Width (px)</Label>
                   <Input
                     type="text"
@@ -286,7 +286,7 @@ export default function TableGenerator() {
                       }
                     }}
                     placeholder="10"
-                    className="h-8 w-14 text-xs"
+                    className="h-8 flex-1 text-xs"
                   />
                   <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
                 </div>
@@ -317,7 +317,7 @@ export default function TableGenerator() {
                   {columns.map((column, index) => (
                     <div
                       key={column.id}
-                      className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
+                      className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 w-full ${
                         animatingIds.has(column.id) ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
                       }`}
                     >
@@ -348,7 +348,7 @@ export default function TableGenerator() {
                           }
                         }}
                         placeholder={String(column.width)}
-                        className="h-8 w-14 text-xs"
+                        className="h-8 flex-1 text-xs"
                       />
                       <span className="text-xs text-slate-600 dark:text-slate-400 min-w-fit">px</span>
                       <Button
