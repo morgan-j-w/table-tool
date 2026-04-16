@@ -30,11 +30,42 @@ export default function TableGenerator() {
   })
   const [copied, setCopied] = useState(false)
   const [animatingIds, setAnimatingIds] = useState<Set<string>>(new Set())
+  const [mounted, setMounted] = useState(false)
 
   const DEFAULT_COLUMNS: Column[] = [
     { id: "1", width: 320 },
     { id: "2", width: 320 },
   ]
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedState = localStorage.getItem('tableGeneratorState')
+    if (savedState) {
+      try {
+        const { columns: savedColumns, useGutter: savedUseGutter, gutterWidth: savedGutterWidth, columnInputValues: savedInputValues } = JSON.parse(savedState)
+        setColumns(savedColumns)
+        setUseGutter(savedUseGutter)
+        setGutterWidth(savedGutterWidth)
+        setColumnInputValues(savedInputValues)
+      } catch (e) {
+        console.error('Failed to load saved state:', e)
+      }
+    }
+    setMounted(true)
+  }, [])
+
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    if (mounted) {
+      const state = {
+        columns,
+        useGutter,
+        gutterWidth,
+        columnInputValues,
+      }
+      localStorage.setItem('tableGeneratorState', JSON.stringify(state))
+    }
+  }, [columns, useGutter, gutterWidth, columnInputValues, mounted])
 
   // Sync input values when state changes (from slider)
   useEffect(() => {
@@ -50,6 +81,7 @@ export default function TableGenerator() {
       "1": "320",
       "2": "320",
     })
+    localStorage.removeItem('tableGeneratorState')
   }, [])
 
   const addColumn = useCallback(() => {
