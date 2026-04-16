@@ -203,3 +203,35 @@
 .dark .hljs-quote { color: #5c6370; }
 .dark .hljs-keyword { color: #c678dd; }
 .dark .hljs-section { color: #61afef; font-weight: bold; }
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(241, 245, 249);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(148, 163, 184);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 116, 139);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgb(15, 23, 42);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(51, 65, 85);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(71, 85, 105);
+}
