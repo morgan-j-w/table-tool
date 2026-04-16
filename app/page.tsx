@@ -193,11 +193,11 @@ export default function TableGenerator() {
       {/* Sticky Header */}
       <header className="text-white shadow-lg p-4 md:p-6 sticky top-0 z-50" style={{backgroundColor: 'rgb(33, 41, 44)'}}>
         <div className="mx-auto max-w-6xl flex items-center gap-3 md:gap-4">
-          <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
+          <a href="https://swiftdigital.com.au/" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
             <img 
-              alt="Floating Table Generator Logo" 
+              alt="Swift Digital Logo" 
               className="h-8 md:h-12 w-auto" 
-              src="/placeholder-logo.svg"
+              src="https://prod-swiftdigital-staticassets.s3-ap-southeast-2.amazonaws.com/sd_images/zzzz5705ed8cb762d381zzzz6836acb89a771304"
             />
           </a>
           <div>
