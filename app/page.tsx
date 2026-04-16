@@ -218,7 +218,7 @@ export default function TableGenerator() {
                 {columns.map((column, index) => (
                   <div key={column.id} className="flex shrink-0">
                     <div
-                      className={`flex flex-col items-center justify-center border-2 border-primary bg-blue-50 dark:bg-blue-950 text-xs font-medium text-primary dark:text-blue-300 transition-all duration-300 ${
+                      className={`flex flex-col items-center justify-center border-2 border-primary bg-blue-50 dark:bg-blue-950 text-xs font-medium text-slate-900 dark:text-slate-100 transition-all duration-300 ${
                         animatingIds.has(column.id) ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
                       }`}
                       style={{
