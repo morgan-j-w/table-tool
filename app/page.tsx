@@ -2,6 +2,7 @@
 
 // Text input version for free deletion support
 import { useState, useCallback, useEffect } from "react"
+import Image from 'next/image'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-light.css'
 import { Button } from "@/components/ui/button"
@@ -191,10 +192,19 @@ export default function TableGenerator() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900">
       {/* Sticky Header */}
-      <header className="text-white shadow-lg p-4 md:p-6 sticky top-0 z-50" style={{backgroundColor: 'rgb(31, 41, 55)'}}>
-        <div className="mx-auto max-w-6xl">
-          <h1 className="text-lg md:text-2xl font-bold">Floating Table Generator</h1>
-          <p className="text-xs md:text-sm text-gray-300 mt-1">Generate responsive HTML email tables with floating layouts</p>
+      <header className="text-white shadow-lg p-4 md:p-6 sticky top-0 z-50" style={{backgroundColor: 'rgb(33, 41, 44)'}}>
+        <div className="mx-auto max-w-6xl flex items-center gap-4">
+          <Image 
+            src="/icon.svg" 
+            alt="Logo" 
+            width={40}
+            height={40}
+            className="w-8 md:w-10 h-auto"
+          />
+          <div>
+            <h1 className="text-lg md:text-2xl font-bold">Floating Table Generator</h1>
+            <p className="text-xs md:text-sm text-gray-300">Generate responsive HTML email tables with floating layouts</p>
+          </div>
         </div>
       </header>
 
