@@ -255,7 +255,7 @@ export default function TableGenerator() {
           {/* Gutter Settings Card */}
           <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
             <CardContent className="p-4">
-              <div className="flex items-center gap-0 mb-3">
+              <div className="flex items-center gap-2 mb-3">
                 <MoreVertical className="h-4 w-4 text-slate-500" />
                 <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Gutter</h3>
               </div>
@@ -268,7 +268,7 @@ export default function TableGenerator() {
                 />
               </div>
               {useGutter && (
-                <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-0">
+                <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 flex items-center gap-2">
                   <Label htmlFor="gutter-width" className="text-xs font-medium text-slate-600 dark:text-slate-400 min-w-fit">Width (px)</Label>
                   <Input
                     type="text"
@@ -301,7 +301,7 @@ export default function TableGenerator() {
                 <Grid2X2 className="h-4 w-4 text-slate-500" />
                 <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Columns</h3>
               </div>
-              <div className="flex items-center justify-between gap-0 mb-2">
+              <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-xs text-slate-500 dark:text-slate-400">{columns.length} {columns.length === 1 ? 'column' : 'columns'}</span>
                 <Button size="sm" variant="outline" onClick={addColumn} className="h-6 text-xs px-2">
                   <Plus className="mr-0.5 h-3 w-3" />
@@ -317,7 +317,7 @@ export default function TableGenerator() {
                   {columns.map((column, index) => (
                     <div
                       key={column.id}
-                      className={`flex items-center gap-0 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
+                      className={`flex items-center gap-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 px-3 py-2 transition-all duration-150 ${
                         animatingIds.has(column.id) ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
                       }`}
                     >
@@ -371,7 +371,7 @@ export default function TableGenerator() {
           {columns.length > 0 && (
             <Card className="border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
               <CardContent className="p-4">
-                <div className="grid grid-cols-1 gap-0">
+                <div className="grid grid-cols-1 gap-2">
                   <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-4">
                     <div className="flex items-center gap-1.5 mb-2">
                       <Grid2X2 className="h-4 w-4 text-blue-500" />
