@@ -192,7 +192,7 @@ export default function TableGenerator() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-zinc-950 dark:to-zinc-900">
       {/* Sticky Header */}
       <header className="text-white shadow-lg p-4 md:p-6 sticky top-0 z-50" style={{backgroundColor: 'rgb(33, 41, 44)'}}>
-        <div className="mx-auto max-w-6xl flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           <a href="https://swiftdigital.com.au/" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
             <img 
               alt="Swift Digital Logo" 
