@@ -376,14 +376,14 @@ export default function TableGenerator() {
                 <div className="grid grid-cols-1 gap-2">
                   <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-4">
                     <div className="flex items-center gap-1.5 mb-2">
-                      <Grid2X2 className="h-4 w-4 text-blue-500" />
+                      <Grid2X2 className="h-4 w-4" style={{color: '#ec2176'}} />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Columns</p>
                     </div>
                     <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{columns.length}</p>
                   </div>
                   <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-4">
                     <div className="flex items-center gap-1.5 mb-2">
-                      <Maximize2 className="h-4 w-4 text-green-500" />
+                      <Maximize2 className="h-4 w-4" style={{color: '#ec2176'}} />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Column Width</p>
                     </div>
                     <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth}</p>
@@ -391,7 +391,7 @@ export default function TableGenerator() {
                   {useGutter && columns.length > 1 && (
                     <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-4">
                       <div className="flex items-center gap-1.5 mb-2">
-                        <MoreVertical className="h-4 w-4 text-amber-500" />
+                        <MoreVertical className="h-4 w-4" style={{color: '#ec2176'}} />
                         <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Gutter Width</p>
                       </div>
                       <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalGutterWidth}px</p>
@@ -399,7 +399,7 @@ export default function TableGenerator() {
                   )}
                   <div className="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 p-4">
                     <div className="flex items-center gap-1.5 mb-2">
-                      <BarChart3 className="h-4 w-4 text-purple-500" />
+                      <BarChart3 className="h-4 w-4" style={{color: '#ec2176'}} />
                       <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Total</p>
                     </div>
                     <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{totalColumnWidth + totalGutterWidth}px</p>
